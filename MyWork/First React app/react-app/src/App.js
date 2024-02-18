@@ -1,32 +1,29 @@
 //import logo from './logo.svg';
 import './App.css';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 
-function App() {
-  const [emotion, setEmotion] = useState("Happy");
-  const [secondary, setSecondary] = useState("Tired");
-  useEffect(() => {
-    console.log(`It's ${emotion} right now`);
-  }, [emotion]);
+function App() { 
 
-  useEffect(() => {
-    console.log(`It's ${secondary} around here`);
-  }, [secondary])
- 
+  const [title, setTitle] = useState("");
+  const [color, setColor] = useState("#000000")
+
+  const submit = (e) => {
+    e.preventDefault();
+    
+    alert(`${title}, ${color}`);
+    setTitle("");
+    setColor("");
+
+  };
   return (
-    <div className="App">
+    <form onSubmit={submit}>
+      
+      <input value={title} onChange={(event) => setTitle(event.target.value)} type="text" placeholder="color title..." />
+      <input value={color} type="color" onChange={(event)=> setColor(event.target.value)}/>
+      <button>Add</button>
 
-
-      <h1>Current Emotion is {emotion} </h1>
-      <button onClick={() => setEmotion("Sad") }>Sad</button>
-      <button onClick={() => setEmotion("Excited") }>Excited</button>
-      <button onClick={() => setEmotion("Happy") }>Happy</button>
-
-      <h2>Current Secondary Emotion is {secondary} </h2>
-      <button onClick={() => setSecondary("Greatful") }>Greatful</button>
-      <button onClick={() => setSecondary("Tired") }>Tired</button>
-    </div>
+    </form>
   );
 }
 
