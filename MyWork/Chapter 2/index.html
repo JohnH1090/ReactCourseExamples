@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>React ⚛️</title>
+  </head>
+  <body>
+      <div id="root"></div>
+      
+      <script type="text/babel">
+        
+          function Header(props ) {
+            console.log(props);
+            return(
+            <header>
+              <h1> {props.name}'s Kitchen </h1>
+            </header>)
+          };
+
+          function Main (props) {
+            return(
+            <section> <p>We serve the most {props.adjective} food around</p> 
+              <img height={200} src="./restaurant.jpg" alt="Food being served on a plate"/>
+                <ul>
+                  {props.dishes.map((dish) => (
+                      <li key={dish.id}>{dish.title}</li>
+                  ))}
+                </ul>
+            </section>  
+            
+            );
+          };
+
+          function Footer(props){
+              return(
+                <footer>
+                  Copyright {props.year}
+                </footer>
+              )
+          }
+
+          const dishes = [
+            "Pasta",
+            "Pizza",
+            "Burgers",
+            "Salad"
+
+          ];
+
+          const dishObjects = dishes.map((dish, i) => (
+            {
+              id: i,
+              title: dish
+            }
+          ));
+
+          function App() {
+
+            return(
+                <React.Fragment>
+                  <Header name="John"/>
+                  <Main adjective="amazing" dishes={dishObjects}/>
+                  <Footer year={new Date().getFullYear()} />
+                </React.Fragment>
+            )
+
+          }
+          ReactDOM.render(
+              
+              <App />,
+              document.getElementById("root")
+          );
+      </script>
+  </body>
+</html>
